@@ -1,0 +1,721 @@
+!<arch>
+busca.h/        0           0     0     644     2056      `
+/**
+ * @file	busca.h
+ * @brief	Declaração de funções responsáveis por executar buscas de forma recursiva
+ * @author	Luan Pereira (luanpereira00@outlook.com)
+ * @since	18/03/2017
+ * @date	18/03/2017
+ */
+
+#ifndef _BUSCA_H_
+#define _BUSCA_H_
+
+/**
+* @brief Responsável por realizar uma busca binária e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @param *V vetor para realizar a busca
+* @param N Tamanho do vetor
+* @param x Elemento à ser buscado no vetor
+* @return boolean para o caso do elemento estar ou não no vetor
+*/
+template <class T>
+bool buscaBinariaR(T *V, int N, T x){
+	if(N<=0) return false;
+	int k=N/2;
+	if (V[k]==x) return true;
+	if (x<V[k]) return buscaBinariaR(V, k, x);
+	if (x>V[k]) return buscaBinariaR(&V[k+1], N-k-1, x);
+	
+	return false;
+}
+
+
+/**
+* @brief Responsável por realizar uma busca ternária e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @param *vetor vetor para realizar a busca
+* @param ini Início do vetor
+* @param fim Final do vetor
+* @param x Elemento à ser buscado no vetor
+* @return boolean para o caso do elemento estar ou não no vetor
+*/
+template <class  T>
+bool buscaTernariaR(T *V, int ini, int fim, T x){
+	int mid1=fim/3, mid2=2*fim/3;
+	if (x==V[ini]) return true;
+	if (x==V[fim]) return true;
+	if (x>V[ini] and x<V[mid1]) return buscaTernariaR(V, ini+1, mid1-1, x);
+	if (x>=V[mid1] and x<=V[mid2]) return buscaTernariaR(V, mid1, mid2, x);
+	if (x>V[mid2] and x<V[fim]) return buscaTernariaR(V, mid2+1, fim-1, x);
+	
+	return false;
+}
+
+
+
+/**
+* @brief Responsável por realizar uma busca sequencial e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @param *V vetor para realizar a busca
+* @param N Tamanho do vetor
+* @param x Elemento à ser buscado no vetor
+* @return boolean para o caso do elemento estar ou não no vetor
+*/
+template <class T>
+int buscaSequencialI(T *V, int N, T x){
+	for (int i=0; i<N; i++){
+		if(x==V[i]) return i;
+	}
+	
+	return -1;
+}
+
+
+#endifvetor.h/        0           0     0     644     1754      `
+/**
+ * @file	vetor.h
+ * @brief	Declara��o de fun��es que fazem trocas de valores A e B
+ * @author	Luan Pereira (luanpereira00@outlook.com)
+ * @since	18/03/2017
+ * @date	18/03/2017
+ */
+
+
+#ifndef _VETOR_H_
+#define _VETOR_H_
+
+#include <iostream>
+using std::cout;
+using std::endl;
+
+/**
+* @brief Respons�vel por imprimir um vetor
+* @param *V Apontador para um vetor de inteiros
+* @param N Tamanho do vetor
+* @return Sem retorno
+*/
+template <class T>
+void printVetor(T *V, int N){
+	cout << "V = {";
+	for (int i=0; i<N; i++) {
+		if((i>0)&&(i<N)) cout << ", ";
+		cout << V[i];
+	}
+	cout << "}\n" << endl;
+	return;
+}
+
+template<class T>
+void troca(T *a, T *b){
+	(*a)=(*a)+(*b);
+	(*b)=(*a)-(*b);
+	(*a)=(*a)-(*b);
+}
+
+/**
+* @brief Respons�vel por atribuir um vetor ao outro
+* @param *V Apontador para o vetor final de inteiros
+* @param *Vtemp Apontador para o vetor que ser� atribuido ao final
+* @param N Tamanho dos vetores
+* @return Sem retorno
+*/
+template <class T>
+void trocaVetor(T *V, T *Vtemp, int N){
+	for (int i=0; i<N; i++) V[i]=Vtemp[i];
+}
+
+
+/**
+* @brief Respons�vel por inicializar um vetor com um valor
+* @param *V Apontador para o vetor de inteiros
+* @param N Tamanho dos vetores
+* @param valor Valor � ser inicializado no vetor
+* @return Sem retorno
+*/
+template <class T>
+void initVetor(T *V, int N, T valor){
+	for (int i=0; i<N; i++) V[i]=valor;
+}
+
+/**
+* @brief Respons�vel por verificar se um vetor est� ordenado de forma crescente
+* @param *V Apontador para o vetor de inteiros
+* @param N Tamanho dos vetores
+* @return Sem retorno
+*/
+template <class T>
+bool isOrdered(T *V, int N){
+	for (int i=0; i<N-1; i++) {
+		if(V[i]>V[i+1]) return false;
+	}
+	return true;
+}
+
+
+#endifsort.h/         0           0     0     644     4562      `
+/**
+ * @file	sort.h
+ * @brief	Declaração de funções que fazem ordenações de vetores
+ * @author	Luan Pereira (luanpereira00@outlook.com)
+ * @since	23/03/2017
+ * @date	23/03/2017
+ */
+
+
+#ifndef _SORT_H_
+#define _SORT_H_
+	#include <iostream>
+	using std::cout;
+	using std::endl;
+
+	#include <cmath>
+
+	#include "vetor.h"
+	
+
+	/**
+	* @brief Responsável por executar uma ordenação do tipo Bubble(Bolha)
+	* @param *V Apontador para um vetor de inteiros
+	* @param N Tamanho do vetor
+	* @return Sem retorno
+	*/
+	template <class T>
+	void bubbleSort(T *V, int N){
+		int i, j, k=N;
+		
+		for(j=0; j<N; j++){
+			
+			for(i=0; i<k-1; i++){
+				if(V[i]>V[i+1]) troca(&V[i], &V[i+1]);
+			}	
+			printVetor(V, N);
+		}
+	}
+	
+	
+	
+	/**
+	* @brief Responsável por executar uma ordenação do tipo Decimal
+	* @param *V Apontador para um vetor de inteiros
+	* @param N Tamanho do vetor
+	* @param dec Responsável por indicar à função qual casa decimal ordenar (unid, dezen, cent...)
+	* @return Sem retorno
+	*/
+	template <class T>
+	void decimalSort(T *V, int N, int dec = 0){
+		int i, aux;
+		T *Vtemp = new T[N];
+		T *Vsimb = new T[N];
+		T *Voffset= new T[N];
+		
+		printVetor(V, N);
+		initVetor(Vsimb, N, 0);
+		initVetor(Voffset, N, 0);
+		
+							//Vsimb[27/1 = 27%10 = 7]
+		for(i=0; i<N; i++) {
+			aux=int(V[i]/pow(10, dec))%10;
+			Vsimb[aux]++;
+		}
+
+							//Voffset[1]=Voffset[0]+Vsimb[0];
+		for(i=1; i<10; i++) {
+			Voffset[i]=Voffset[i-1]+Vsimb[i-1];
+		}
+		for(i=0; i<N; i++){
+			aux=int(V[i]/pow(10, dec))%10;
+			Vtemp[Voffset[aux]]=V[i];
+			Voffset[aux]++;
+		}
+		trocaVetor(V, Vtemp, N);
+		
+		
+		if(isOrdered(V, N)){
+			printVetor(V, N);
+			return;
+		}
+		else decimalSort(V, N, ++dec);
+		
+		delete[] Vtemp;
+		delete[] Vsimb;
+		delete[] Voffset;
+	}
+	
+	/**
+	* @brief Responsável por executar uma ordenação do tipo Insertion(Inserção)
+	* @param *V Apontador para um vetor de inteiros
+	* @param N Tamanho do vetor
+	* @return Sem retorno
+	*/
+	template <class T>
+	void insertionSort(T *V, int N){
+		int i, j, x;
+		
+		for (i=1; i<N; i++){	
+			
+			x=V[i];
+			j=i-1;
+			while((j>=0) && (x<V[j])){
+				V[j+1]=V[j];
+				j--;
+			}
+			V[j+1]=x;
+			cout << "Ordenado ";
+			printVetor(V, i);
+			cout << " e Não-Ordenado ";
+			printVetor(&V[i], (N-i));
+		}
+	}
+	
+	
+	
+	/**
+	* @brief Responsável por executar uma ordenação do tipo Selection(Seleção)
+	* @param *V Apontador para um vetor de inteiros
+	* @param N Tamanho do vetor
+	* @return Sem retorno
+	*/
+	template<class T>
+	void selectionSort(T *V, int N){
+		int min, i, j;
+		for(i=0; i<N-1; i++){
+			min=i;
+			
+			for(j=i+1; j<N; j++){
+				if (V[min]>V[j]) min=j;
+			}
+			if(min!=i) troca(&V[min], &V[i]);
+			cout << "Ordenado ";
+			printVetor(V, i);
+			cout << " e Não-Ordenado ";
+			printVetor(&V[i], (N-i));	
+		}
+	}
+	
+	/**
+	* @brief Responsável por executar uma intercalação para o MergeSort
+	* @param *V Apontador para um vetor de inteiros
+	* @param N Tamanho do vetor
+	* @return Sem retorno
+	*/
+	template <class T>
+	void intercalar(T *V, int N){
+		int i=0, k=N/2, j=0;
+		
+		T *Vtemp = new T[N];
+		
+		while((i< (N/2)) && (k < N)){
+			if(V[i] <= V[k]) Vtemp[j++]=V[i++];
+			else Vtemp[j++]=V[k++];		
+		}
+		while (i<N/2)Vtemp[j++]=V[i++];
+		while(k < N) Vtemp[j++]=V[k++];
+		
+		trocaVetor(V, Vtemp, N);
+		delete[] Vtemp;
+	}
+	
+	/**
+	* @brief Responsável por executar uma ordenação do tipo Merge(Mescla)
+	* @param *V Apontador para um vetor de inteiros
+	* @param N Tamanho do vetor
+	* @return Sem retorno
+	*/
+	template<class T>
+	void mergeSort(T *V, int N){
+		if(N<=1) return;
+		if(N==2){
+			if(V[0]<V[1]) return;
+			else {
+				troca(&V[0], &V[1]);
+				return;
+			}
+		}
+		int k=N/2;
+		
+		//printVetor(V, N);
+		
+		mergeSort(V, k);
+		mergeSort(&V[k], N-k);
+		intercalar(V, N);
+		printVetor(V, N);
+	}
+	
+	/**
+	* @brief Responsável por executar uma ordenação do tipo Quick(Rápida)
+	* @param *V Apontador para um vetor de inteiros
+	* @param N Tamanho do vetor
+	* @return Sem retorno
+	*/
+	template<class T>
+	void quickSort(T *V, int N){
+		if(N<=1) return;
+		int i=0, j=N-1, pivot;
+		pivot=V[(i+j)/2];
+		cout << "Pivot: " << pivot << endl;
+		printVetor(V, N);
+		while (i<j){
+			while (V[i] <= pivot){
+				i++;
+			}
+			while (V[j] > pivot){
+				j--;
+			}
+			if(i<j){
+				troca(&V[i], &V[j]);
+			}
+			i++;
+			j--;
+		}
+		
+		if(j>0) quickSort(V, j);
+		if(i<N-1) quickSort(&V[j], N-j);
+		printVetor(V, N);
+	}
+#endiftad.h/          0           0     0     644     7700      `
+/**
+ * @file	lista.h
+ * @brief	Definicao da classe lista para representar uma lista ligada ordenada duplamente encadeada de dados
+ * @details Os atributos de uma lista sao as sentinelas de inicio e de fim
+ * @author	Luan Pereira (luanpereira00@outlook.com)
+ * @since	17/05/2017
+ * @date	17/05/2017
+ */
+#ifndef LISTA_H
+#define LISTA_H
+
+#include <iostream>
+using std::cout;
+using std::cerr;
+using std::endl;
+
+/** @brief Declaracao de template para o tipo T (int, float, double...)*/
+template <typename T>
+
+/** 
+* struct node lista.h
+* @brief Um struct para representar os nos de lista ligada
+*/
+struct nodeDeque{
+	T dado; /**< Elemento generico do no*/
+	nodeDeque* prox; /**< Apontador para o proximo no*/
+	nodeDeque* anter; /**< Apontador para o no anterior*/
+};
+
+/** 
+ * @class 	lista lista.h
+ * @brief 	Classe que representa uma lista ligada ordenada duplamente encadeada de dados
+ * @details Os atributos de uma lista sao as sentinelas de inicio e de fim 
+ */
+template <typename T>
+class deque{
+private:
+	nodeDeque<T>* inicio; /**< Sentinela de inicio da lista*/
+	nodeDeque<T>* fim; /**< Sentinela de fim da lista*/
+
+public:
+	/** @brief Construtor padrao */
+	deque(){
+		inicio = new struct nodeDeque<T>;
+		fim = new struct nodeDeque<T>;
+
+		inicio->dado=0;
+		inicio->prox=fim;
+		inicio->anter=NULL;
+
+		fim->dado=0;
+		fim->prox=NULL;
+		fim->anter=inicio;
+	}
+	/** @brief Destrutor padrao */
+	~deque(){
+		nodeDeque<T>* tmp = new nodeDeque<T>;
+		nodeDeque<T>* aux = inicio;
+		tmp->prox=inicio->prox;
+		while(tmp->prox->prox){
+			delete aux;
+			aux = tmp->prox;
+			tmp->prox=tmp->prox->prox;
+		}
+		delete aux;
+		delete tmp->prox;;
+		delete tmp;
+	}
+
+	/** @return Retorna a sentinela de inicio da lista ligada*/
+	nodeDeque<T>* getInicio(){
+		return inicio;
+	}
+
+	/** @return Retorna a sentinela de fim da lista ligada*/
+	nodeDeque<T>* getFim(){
+		return fim;
+	}
+
+	/** 
+	* @brief Insere um elemento ordenadamente na lista
+	* @param el O elemento que sera inserido na lista 
+	*/
+	void inserir(T el){
+		//cout << "Inserindo o elemento " << el << endl;
+		nodeDeque<T>* it = buscar(el);
+		nodeDeque<T>* tmp = new nodeDeque<T>;
+		tmp->dado=el;
+		tmp->prox=it->prox;
+		tmp->anter=it;
+
+		it->prox->anter=tmp;
+		it->prox=tmp;
+	}
+
+	/** 
+	* @brief Remove um elemento da lista ligada. (Informa também caso o elemento nao exista)
+	* @param el O elemento que sera removido da lista 
+	*/
+	void remover(T el){
+		//cout << endl;
+		//cout << "Removendo o elemento " << el << endl;
+		nodeDeque<T>* it = buscar(el);
+		if(it->prox->dado==el){
+			nodeDeque<T>* tmp = new nodeDeque<T>;
+			tmp->prox=it->prox->prox;
+			tmp->anter=it;
+
+			delete it->prox; 
+
+			it->prox=tmp->prox;
+			it->prox->anter=tmp->anter;
+
+			delete tmp; 
+		}
+		else cerr << "ERRO: Impossivel remover o elemento " << el << " (nao existe na lista)! ...Continuando operacoes" << endl;
+	}
+
+	/** @brief Imprime toda a lista ligada*/
+	void imprimir(){
+		nodeDeque<T>* it = inicio;
+		if(it->prox->prox){
+			cout << "-----------------------" << endl;
+			cout << "Lista: " << endl;
+		}
+		while(it->prox->prox){
+			cout << it->prox->dado << endl;
+			it=it->prox;
+		}
+		if(it->prox->prox) cout << "-----------------------" << endl;
+	}
+
+	/** 
+	* @brief Busca na lista ligada (usado para inserir e remover apenas!)
+	* @param el O elemento que sera removido da lista 
+	*/
+	nodeDeque<T>* buscar(T el){
+		nodeDeque<T>* it = inicio;
+		while(it->prox->prox && it->prox->dado<el){
+			it=it->prox;
+		}
+		return it;
+	}
+};
+
+/** 
+* struct node lista.h
+* @brief Um struct para representar os nos de lista ligada
+*/
+template <typename T>
+struct nodeLista{
+	T dado; /**< Elemento generico do no*/
+	nodeLista* prox; /**< Apontador para o proximo no*/
+};
+
+/** 
+ * @class 	lista lista.h
+ * @brief 	Classe que representa uma lista ligada ordenada duplamente encadeada de dados
+ * @details Os atributos de uma lista sao as sentinelas de inicio 
+ */
+template <typename T>
+class lista{
+private:
+	nodeLista<T>* inicio; /**< Sentinela de inicio da lista*/
+
+public:
+	/** @brief Construtor padrao */
+	lista(){
+		inicio = new struct nodeLista<T>;
+
+		inicio->dado=0;
+		inicio->prox=NULL;
+	}
+	/** @brief Destrutor padrao */
+	~lista(){
+		nodeLista<T>* tmp = new nodeLista<T>;
+		nodeLista<T>* aux = inicio;
+		tmp->prox=inicio->prox;
+		while(tmp->prox->prox){
+			delete aux;
+			aux = tmp->prox;
+			tmp->prox=tmp->prox->prox;
+		}
+		delete aux;
+		delete tmp;
+	}
+
+	/** @return Retorna a sentinela de inicio da lista ligada*/
+	nodeLista<T>* getInicio(){
+		return inicio;
+	}
+
+	/** 
+	* @brief Insere um elemento ordenadamente na lista
+	* @param el O elemento que sera inserido na lista 
+	*/
+	void inserir(T el){
+		//cout << "Inserindo o elemento " << el << endl;
+		//nodeLista<T>* it = buscar(el);
+		nodeLista<T>* tmp = new nodeLista<T>;
+		tmp->dado=el;
+		tmp->prox=inicio;
+
+		inicio=tmp;
+	}
+
+	/** 
+	* @brief Remove um elemento da lista ligada. (Informa também caso o elemento nao exista)
+	* @param el O elemento que sera removido da lista 
+	*/
+	void remover(T el){
+		//cout << endl;
+		//cout << "Removendo o elemento " << el << endl;
+		nodeLista<T>* it = buscar(el);
+		if(it->prox->dado==el){
+			nodeLista<T>* tmp = new nodeLista<T>;
+			tmp->prox=it->prox->prox;
+			delete it->prox; 
+			it->prox=tmp->prox;
+			delete tmp; 
+		}
+		else cerr << "ERRO: Impossivel remover o elemento " << el << " (nao existe na lista)! ...Continuando operacoes" << endl;
+	}
+
+	/** @brief Imprime toda a lista ligada*/
+	void imprimir(){
+		nodeLista<T>* it = inicio;
+		if(it->prox->prox){
+			cout << "-----------------------" << endl;
+			cout << "Lista: " << endl;
+		}
+		while(it->prox->prox){
+			cout << it->prox->dado << endl;
+			it=it->prox;
+		}
+		if(it->prox->prox) cout << "-----------------------" << endl;
+	}
+
+	/** 
+	* @brief Busca na lista ligada (usado para inserir e remover apenas!)
+	* @param el O elemento que sera removido da lista 
+	*/
+	nodeLista<T>* buscar(T el){
+		nodeLista<T>* it = inicio;
+		while(it->prox->prox && it->prox->dado<el){
+			it=it->prox;
+		}
+		return it;
+	}
+};
+
+
+/** 
+ * @class 	pilha stack.h
+ * @brief 	Classe que representa uma pilha de dados
+ * @details Os atributos de uma pilha sao o vetor e o tamanho do vetor 
+ */
+template <typename T>
+class pilha{
+private:
+	T *vetor; /**< O vetor que contem a pilha*/
+	int tam; /**< O tamanho da pilha*/
+
+public:
+
+	/** @return Retorna o tamanho do vetor */
+	int getTam(){
+		return tam;
+	}
+
+	/** 
+	* @brief Modifica o tamanho do vetor 
+	* @param t O tamanho do vetor 
+	*/
+
+	void setTam(int t){
+		tam = t;
+	}
+
+	/** 
+	* @brief Modifica o ponteiro do vetor 
+	* @param *v O ponteiro do vetor 
+	*/
+	void setVetor(T *v){
+		vetor = v;
+	}
+
+	/** @return Retorna o ponteiro do vetor */
+	T* getVetor(){
+		return vetor;
+	}
+
+	/** 
+	* @brief Adiciona um elemento a pilha 
+	* @param elemento O elemento que sera adicionado
+	*/
+	void push(T elemento){
+		T *antigo = vetor;
+		
+		T *novo = new T[getTam()+1];
+		for (int  i=0; i<getTam(); i++) novo[i]=antigo[i];
+		novo[getTam()]=elemento;
+		setTam(getTam()+1);
+		setVetor(novo);
+		if(getTam()>0) delete[] antigo;
+	}
+
+	/** @return Retorna o elemento do topo da pilha */
+	T top(){ 
+		return vetor[getTam()-1];
+	}
+
+	/** @brief Remove o elemento do topo da pilha */
+	void pop(){
+		if(getTam()>0) {
+			T *antigo = vetor;
+			T *novo = new T[getTam()-1];
+			for (int  i=0; i<getTam()-1; i++) novo[i]=antigo[i];
+			setTam(getTam()-1);
+			setVetor(novo);
+			delete[] antigo;
+		}
+	}
+
+	/** 
+	* @brief Construtor parametrizado 
+	* @param *v O vetor 
+	* @param t O tamanho do vetor 
+	*/
+	pilha(T *v, int t){
+		//construtor parametrizado
+		setVetor(v);
+		setTam(t);
+	}
+
+	/** @brief Construtor padrao*/
+	pilha(){
+		//construtor padrao
+	}
+
+	/** @brief Destrutor padrao */
+	~pilha(){
+		if(getTam()>0) delete[] vetor;
+		tam=0;
+	}
+};
+
+#endif

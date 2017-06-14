@@ -15,6 +15,7 @@ using std::cin;
 #include "sort.h"
 #include "busca.h"
 #include "vetor.h"
+#include "tad.h"
 /** @brief Função principal */
 int main (){
 	int N=26, opcao=1, elemento;
@@ -26,24 +27,25 @@ int main (){
 	//int V[6] = {212, 5, 9, 155, 13, 17};
 	
 	while(opcao != 0){
-		cout << endl;
-		cout << "As opções relativas à vetores são essas: " << endl;
-		cout << "(1) Ler Vetor" << endl;
-		cout << "(2) Imprimir Vetor" << endl;
-		cout << "(3) Busca Binaria Recursiva" << endl;
-		cout << "(4) Busca Ternaria Recursiva" << endl;
-		cout << "(5) Busca Sequencial Iterativa" << endl;
-		cout << "(6) BubbleSort" << endl;
-		cout << "(7) InsertionSort" << endl;
-		cout << "(8) SelectionSort" << endl;
-		cout << "(9) QuickSort" << endl;
-		cout << "(10)MergeSort" << endl;
-		cout << "(11)DecimalSort" << endl;
-		cout << "(0) Sair" << endl;
-		cout << "Digite a sua opção: ";
-		cin >> opcao;
-		cout << endl;
-
+		do{
+			cout << endl;
+			cout << "As opções relativas à vetores são essas: " << endl;
+			cout << " 1 - Ler Vetor" << endl;
+			cout << " 2 - Imprimir Vetor" << endl;
+			cout << " 3 - Busca Binaria Recursiva" << endl;
+			cout << " 4 - Busca Ternaria Recursiva" << endl;
+			cout << " 5 - Busca Sequencial Iterativa" << endl;
+			cout << " 6 - BubbleSort" << endl;
+			cout << " 7 - InsertionSort" << endl;
+			cout << " 8 - SelectionSort" << endl;
+			cout << " 9 - QuickSort" << endl;
+			cout << "10 - MergeSort" << endl;
+			cout << "11 - DecimalSort" << endl;
+			cout << " 0 - Sair" << endl;
+			cout << "Digite a sua opção: ";
+			cin >> opcao;
+			cout << endl;
+		}while(opcao<0 or opcao>11);
 		switch(opcao){
 			case 1:
 				trocaVetor<int>(V, W, N);
