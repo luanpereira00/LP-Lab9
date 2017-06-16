@@ -42,16 +42,16 @@ debug: exec
 
 linux: EDB1.a EDB1.so prog_estatico prog_dinamico
 
-EDB1.a: $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/tad.h
+EDB1.a: $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
 #	$(CC) $(CFLAGS) -c $(SRC_DIR)/funcoes1.cpp -o $(OBJ_DIR)/funcoes1.o
 #	$(CC) $(CFLAGS) -c $(SRC_DIR)/funcoes2.cpp -o $(OBJ_DIR)/funcoes2.o
-	$(AR) rcs $(LIB_DIR)/$@ $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/tad.h
+	$(AR) rcs $(LIB_DIR)/$@ $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
 	@echo "++++ [Biblioteca dinamica criada em $(LIB_DIR)/$@] +++" 
 
-EDB1.so: $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/tad.h
+EDB1.so: $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
 #	$(CC) $(CFLAGS) -fPIC -c $(SRC_DIR)/funcoes1.cpp -o $(OBJ_DIR)/funcoes1.o
 #	$(CC) $(CFLAGS) -fPIC -c $(SRC_DIR)/funcoes2.cpp -o $(OBJ_DIR)/funcoes2.o
-	$(CC) -shared -fPIC -o $(LIB_DIR)/$@ $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/tad.h
+	$(CC) -shared -fPIC -o $(LIB_DIR)/$@ $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
 	@echo "++++ [Biblioteca dinamica criada em $(LIB_DIR)/$@] +++" 
 
 prog_estatico:
@@ -76,7 +76,7 @@ exec: $(OBJ_DIR)/main.o
 
 # Alvo (target) para a construcao do objeto area.o
 # Define os arquivos main.cpp, busca.cpp, sort.cpp, vetor.cpp, busca.h, vetor.h e sort.h como dependencias.
-$(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/tad.h
+$(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
 	$(CC) -c $(CFLAGS) -o $@ $<	
 
 # Alvo (target) para a geração automatica de documentacao usando o Doxygen.
