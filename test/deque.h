@@ -6,8 +6,8 @@
  * @since	17/05/2017
  * @date	17/05/2017
  */
-#ifndef LISTA_H
-#define LISTA_H
+#ifndef _DEQUE_H_
+#define _DEQUE_H_
 
 #include <iostream>
 using std::cout;
@@ -33,14 +33,14 @@ struct nodeDeque{
  * @details Os atributos de uma lista sao as sentinelas de inicio e de fim 
  */
 template <typename T>
-class deque{
+class Deque{
 private:
 	nodeDeque<T>* inicio; /**< Sentinela de inicio da lista*/
 	nodeDeque<T>* fim; /**< Sentinela de fim da lista*/
 
 public:
 	/** @brief Construtor padrao */
-	deque(){
+	Deque(){
 		inicio = new struct nodeDeque<T>;
 		fim = new struct nodeDeque<T>;
 
@@ -53,7 +53,7 @@ public:
 		fim->anter=inicio;
 	}
 	/** @brief Destrutor padrao */
-	~deque(){
+	~Deque(){
 		nodeDeque<T>* tmp = new nodeDeque<T>;
 		nodeDeque<T>* aux = inicio;
 		tmp->prox=inicio->prox;
@@ -115,11 +115,12 @@ public:
 	* @brief Remove um elemento da lista ligada. (Informa também caso o elemento nao exista)
 	* @param el O elemento que sera removido da lista 
 	*/
-	void remover(T el){
+	void removerInicio(){
 		//cout << endl;
 		//cout << "Removendo o elemento " << el << endl;
-		nodeDeque<T>* it = buscar(el);
-		if(it->prox->dado==el){
+		//nodeDeque<T>* it = buscar(el);
+		nodeDeque<T>* it = inicio;
+		if(it->prox->prox){
 			nodeDeque<T>* tmp = new nodeDeque<T>;
 			tmp->prox=it->prox->prox;
 			tmp->anter=it;
@@ -131,7 +132,31 @@ public:
 
 			delete tmp; 
 		}
-		else cerr << "ERRO: Impossivel remover o elemento " << el << " (nao existe na lista)! ...Continuando operacoes" << endl;
+		else cerr << "ERRO: Impossivel remover elementos do deque (DEQUE VAZIO!) ...Continuando operacoes" << endl;
+	}
+
+	/** 
+	* @brief Remove um elemento da lista ligada. (Informa também caso o elemento nao exista)
+	* @param el O elemento que sera removido da lista 
+	*/
+	void removerFim(){
+		//cout << endl;
+		//cout << "Removendo o elemento " << el << endl;
+		//nodeDeque<T>* it = buscar(el);
+		nodeDeque<T>* it = fim;
+		if(it->anter->anter){
+			nodeDeque<T>* tmp = new nodeDeque<T>;
+			tmp->anter=it->anter->anter;
+			tmp->prox=it;
+
+			delete it->anter; 
+
+			it->anter=tmp->anter;
+			it->anter->prox=tmp->prox;
+
+			delete tmp; 
+		}
+		else cerr << "ERRO: Impossivel remover elementos do deque (DEQUE VAZIO!) ...Continuando operacoes" << endl;
 	}
 
 	/** @brief Imprime toda a lista ligada*/
@@ -139,7 +164,7 @@ public:
 		nodeDeque<T>* it = inicio;
 		if(it->prox->prox){
 			cout << "-----------------------" << endl;
-			cout << "Lista: " << endl;
+			cout << "Deque: " << endl;
 		}
 		while(it->prox->prox){
 			cout << it->prox->dado << endl;
@@ -160,101 +185,4 @@ public:
 		return it;
 	}
 };
-
-
-/** 
- * @class 	pilha stack.h
- * @brief 	Classe que representa uma pilha de dados
- * @details Os atributos de uma pilha sao o vetor e o tamanho do vetor 
- */
-template <typename T>
-class pilha{
-private:
-	T *vetor; /**< O vetor que contem a pilha*/
-	int tam; /**< O tamanho da pilha*/
-
-public:
-
-	/** @return Retorna o tamanho do vetor */
-	int getTam(){
-		return tam;
-	}
-
-	/** 
-	* @brief Modifica o tamanho do vetor 
-	* @param t O tamanho do vetor 
-	*/
-
-	void setTam(int t){
-		tam = t;
-	}
-
-	/** 
-	* @brief Modifica o ponteiro do vetor 
-	* @param *v O ponteiro do vetor 
-	*/
-	void setVetor(T *v){
-		vetor = v;
-	}
-
-	/** @return Retorna o ponteiro do vetor */
-	T* getVetor(){
-		return vetor;
-	}
-
-	/** 
-	* @brief Adiciona um elemento a pilha 
-	* @param elemento O elemento que sera adicionado
-	*/
-	void push(T elemento){
-		T *antigo = vetor;
-		
-		T *novo = new T[getTam()+1];
-		for (int  i=0; i<getTam(); i++) novo[i]=antigo[i];
-		novo[getTam()]=elemento;
-		setTam(getTam()+1);
-		setVetor(novo);
-		if(getTam()>0) delete[] antigo;
-	}
-
-	/** @return Retorna o elemento do topo da pilha */
-	T top(){ 
-		return vetor[getTam()-1];
-	}
-
-	/** @brief Remove o elemento do topo da pilha */
-	void pop(){
-		if(getTam()>0) {
-			T *antigo = vetor;
-			T *novo = new T[getTam()-1];
-			for (int  i=0; i<getTam()-1; i++) novo[i]=antigo[i];
-			setTam(getTam()-1);
-			setVetor(novo);
-			delete[] antigo;
-		}
-	}
-
-	/** 
-	* @brief Construtor parametrizado 
-	* @param *v O vetor 
-	* @param t O tamanho do vetor 
-	*/
-	pilha(T *v, int t){
-		//construtor parametrizado
-		setVetor(v);
-		setTam(t);
-	}
-
-	/** @brief Construtor padrao*/
-	pilha(){
-		//construtor padrao
-	}
-
-	/** @brief Destrutor padrao */
-	~pilha(){
-		if(getTam()>0) delete[] vetor;
-		tam=0;
-	}
-};
-
 #endif
