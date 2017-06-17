@@ -58,13 +58,15 @@ int buscaBinariaI(T *V, int N, T x){
 * @return boolean para o caso do elemento estar ou não no vetor
 */
 template <class  T>
-int buscaTernariaR(T *V, int fim, T x, int ini = 0){
-	int mid1=fim/3, mid2=2*fim/3;
+int buscaTernariaR(T *V, int N, T x, int esq = 0){
+	int dir = N-1;
+	int mid1 = (dir - esq)/3 + esq;    
+    int mid2 = 2*(dir - esq)/3 + esq;  
 	if (x==V[mid1]) return mid1;
 	if (x==V[mid2]) return mid2; 
-	if (x>=V[ini] and x<V[mid1]) return buscaTernariaR(V, mid1-1, x, ini+1);
+	if (x>=V[esq] and x<V[mid1]) return buscaTernariaR(V, mid1-1, x, esq+1);
 	if (x>V[mid1] and x<V[mid2]) return buscaTernariaR(V, mid2, x, mid1);
-	if (x>=V[mid2] and x<=V[fim]) return buscaTernariaR(V, fim-1, x, mid2+1);
+	if (x>=V[mid2] and x<=V[dir]) return buscaTernariaR(V, N, x, mid2+1);
 	
 	return -1;
 }

@@ -33,7 +33,7 @@
 			for(i=0; i<k-1; i++){
 				if(V[i]>V[i+1]) troca(&V[i], &V[i+1]);
 			}	
-			printVetor(V, N);
+			//printVetor(V, N);
 		}
 	}
 	
@@ -53,7 +53,7 @@
 		T *Vsimb = new T[N];
 		T *Voffset= new T[N];
 		
-		printVetor(V, N);
+		//printVetor(V, N);
 		initVetor(Vsimb, N, 0);
 		initVetor(Voffset, N, 0);
 		
@@ -76,7 +76,7 @@
 		
 		
 		if(isOrdered(V, N)){
-			printVetor(V, N);
+			//printVetor(V, N);
 			return;
 		}
 		else decimalSort(V, N, ++dec);
@@ -105,10 +105,10 @@
 				j--;
 			}
 			V[j+1]=x;
-			cout << "Ordenado ";
-			printVetor(V, i);
-			cout << " e Não-Ordenado ";
-			printVetor(&V[i], (N-i));
+			//cout << "Ordenado ";
+			//printVetor(V, i);
+			//cout << " e Não-Ordenado ";
+			//printVetor(&V[i], (N-i));
 		}
 	}
 	
@@ -130,10 +130,10 @@
 				if (V[min]>V[j]) min=j;
 			}
 			if(min!=i) troca(&V[min], &V[i]);
-			cout << "Ordenado ";
-			printVetor(V, i);
-			cout << " e Não-Ordenado ";
-			printVetor(&V[i], (N-i));	
+			//cout << "Ordenado ";
+			//printVetor(V, i);
+			//cout << " e Não-Ordenado ";
+			//printVetor(&V[i], (N-i));	
 		}
 	}
 	
@@ -183,7 +183,7 @@
 		mergeSort(V, k);
 		mergeSort(&V[k], N-k);
 		intercalar(V, N);
-		printVetor(V, N);
+		//printVetor(V, N);
 	}
 	
 	/**
@@ -197,8 +197,8 @@
 		if(N<=1) return;
 		int i=0, j=N-1, pivot;
 		pivot=V[(i+j)/2];
-		cout << "Pivot: " << pivot << endl;
-		printVetor(V, N);
+		//cout << "Pivot: " << pivot << endl;
+		//printVetor(V, N);
 		while (i<j){
 			while (V[i] <= pivot){
 				i++;
@@ -215,6 +215,6 @@
 		
 		if(j>0) quickSort(V, j);
 		if(i<N-1) quickSort(&V[j], N-j);
-		printVetor(V, N);
+		//printVetor(V, N);
 	}
 #endif

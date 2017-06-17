@@ -173,6 +173,11 @@ public:
 		if(it->prox->prox) cout << "-----------------------" << endl;
 	}
 
+	bool temAlgo(){
+		if(inicio->prox->prox) return true;
+		else return false;
+	}
+
 	/** 
 	* @brief Busca na lista ligada (usado para inserir e remover apenas!)
 	* @param el O elemento que sera removido da lista 

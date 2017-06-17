@@ -120,6 +120,11 @@ public:
 		}
 		return it;
 	}
+
+	bool temAlgo(){
+		if(inicio->prox) return true;
+		else return false;
+	}
 };
 
 #endif

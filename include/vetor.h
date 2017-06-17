@@ -14,6 +14,10 @@
 using std::cout;
 using std::endl;
 
+#include <cstdlib>
+#include <ctime>
+
+
 /**
 * @brief Responsável por imprimir um vetor
 * @param *V Apontador para um vetor de inteiros
@@ -61,6 +65,19 @@ void trocaVetor(T *V, T *Vtemp, int N){
 template <class T>
 void initVetor(T *V, int N, T valor){
 	for (int i=0; i<N; i++) V[i]=valor;
+}
+
+/**
+* @brief Responsável por inicializar um vetor com um valor
+* @param *V Apontador para o vetor de inteiros
+* @param N Tamanho dos vetores
+* @param valor Valor à ser inicializado no vetor
+* @return Sem retorno
+*/
+template <class T>
+void createVetor(T *V, int N){
+	
+	for (int i=0; i<N; i++) V[i]=rand()%N;
 }
 
 /**

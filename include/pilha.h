@@ -31,6 +31,7 @@ public:
 
 	/** @brief Construtor padrao*/
 	Pilha(){
+		tam=0;
 		//construtor padrao
 	}
 
@@ -101,6 +102,11 @@ public:
 			setVetor(novo);
 			delete[] antigo;
 		}
+	}
+
+	bool temAlgo(){
+		if(getTam()>0) return true;
+		else return false;
 	}
 
 	
