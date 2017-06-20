@@ -36,48 +36,51 @@ ARCHIVE = ar
 
 # Define o alvo (target) para a compilacao completa.
 # Ao final da compilacao, remove os arquivos objeto.
-all: init exec
+all: init linux windows
 debug: CFLAGS += -g -O0
 debug: exec
 
-linux: EDB1.a EDB1.so prog_estatico prog_dinamico
+#linux
+linux: luan.a luan.so prog_estatico prog_dinamico
 
-EDB1.a: $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
-#	$(CC) $(CFLAGS) -c $(SRC_DIR)/funcoes1.cpp -o $(OBJ_DIR)/funcoes1.o
-#	$(CC) $(CFLAGS) -c $(SRC_DIR)/funcoes2.cpp -o $(OBJ_DIR)/funcoes2.o
-	$(AR) rcs $(LIB_DIR)/$@ $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
-	@echo "++++ [Biblioteca dinamica criada em $(LIB_DIR)/$@] +++" 
+luan.a: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
+	$(CC) $(CFLAGS) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o
+	$(AR) rcs $(LIB_DIR)/$@ $(OBJ_DIR)/main.o
+	@echo "++++ [Biblioteca estatica criada em $(LIB_DIR)/$@] +++" 
 
-EDB1.so: $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
-#	$(CC) $(CFLAGS) -fPIC -c $(SRC_DIR)/funcoes1.cpp -o $(OBJ_DIR)/funcoes1.o
-#	$(CC) $(CFLAGS) -fPIC -c $(SRC_DIR)/funcoes2.cpp -o $(OBJ_DIR)/funcoes2.o
-	$(CC) -shared -fPIC -o $(LIB_DIR)/$@ $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
+luan.so: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
+	$(CC) $(CFLAGS) -fPIC -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o
+	$(CC) -shared -fPIC -o $(LIB_DIR)/$@ $(OBJ_DIR)/main.o
 	@echo "++++ [Biblioteca dinamica criada em $(LIB_DIR)/$@] +++" 
 
 prog_estatico:
-	$(CC) $(CFLAGS) $(LIB_DIR)/EDB1.a -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.a -o $(OBJ_DIR)/$@
 
 prog_dinamico:
-	$(CC) $(CFLAGS) $(LIB_DIR)/EDB1.so -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.so -o $(OBJ_DIR)/$@
+
+#windows
+windows: luan.lib luan.dll prog_estatico.exe prog_dinamico.exe
+
+luan.lib: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
+	$(CC) $(CFLAGS) -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o
+	$(AR) rcs $(LIB_DIR)/$@ $(OBJ_DIR)/main.o
+	@echo "++++ [Biblioteca estatica criada em $(LIB_DIR)/$@] +++"
+
+luan.dll: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h        
+	$(CC) $(CFLAGS) -fPIC -c $(SRC_DIR)/main.cpp -o $(OBJ_DIR)/main.o
+	$(CC) -shared -o $(LIB_DIR)/$@ $(OBJ_DIR)/main.o
+	@echo "++++ [Biblioteca dinamica criada em $(LIB_DIR)/$@] +++"
+
+prog_estatico.exe:
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.lib -o $(OBJ_DIR)/$@
+
+prog_dinamico.exe:
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.dll -o $(OBJ_DIR)/$@
 
 init:
 	@mkdir -p $(BIN_DIR)/
 	@mkdir -p $(OBJ_DIR)/
-
-# Alvo (target) para a construcao do executavel
-# Define os arquivos main.o, busca.o, sort.o, troca.o e vetor.o como dependencias
-exec: $(OBJ_DIR)/main.o
-	@echo "============="
-	@echo "Ligando o alvo $@"
-	@echo "============="
-	$(CC) $(CFLAGS) -o $(BIN_DIR)/$@ $^
-	@echo "+++ [Executavel 'exec' criado em $(BIN_DIR)] +++"
-	@echo "============="
-
-# Alvo (target) para a construcao do objeto area.o
-# Define os arquivos main.cpp, busca.cpp, sort.cpp, vetor.cpp, busca.h, vetor.h e sort.h como dependencias.
-$(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/sort.h $(INC_DIR)/pilha.h $(INC_DIR)/fila.h $(INC_DIR)/deque.h $(INC_DIR)/lista.h
-	$(CC) -c $(CFLAGS) -o $@ $<	
 
 # Alvo (target) para a geração automatica de documentacao usando o Doxygen.
 # Sempre remove a documentacao anterior (caso exista) e gera uma nova.

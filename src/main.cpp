@@ -3,13 +3,14 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-#include "busca.h"
+#include "lista.h"
 #include "deque.h"
 #include "fila.h"
-#include "lista.h"
 #include "pilha.h"
-#include "sort.h"
 #include "vetor.h"
+#include "sort.h"
+#include "busca.h"
+
 
 int main(){
 
@@ -23,7 +24,7 @@ int main(){
 	cout << fi.temAlgo() << endl;
 	cout << pil.temAlgo() << endl;
 	cout << endl;*/
-	/*
+	
 	int X[50];
 
 	createVetor(X, 50);
@@ -55,7 +56,7 @@ int main(){
 	printVetor(X, 50);
 	decimalSort(X, 50);
 	printVetor(X, 50);
-	*/
+	
 	/*
 	int V[5] = {1, 2, 4, 5, 8};
 	printVetor(V, 5);
