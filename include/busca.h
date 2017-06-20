@@ -1,6 +1,6 @@
 /**
  * @file	busca.h
- * @brief	Declaração de funções responsáveis por executar buscas de forma recursiva
+ * @brief	Declaracão de funcoes responsaveis por executar buscas de forma recursiva
  * @author	Luan Pereira (luanpereira00@outlook.com)
  * @since	18/03/2017
  * @date	18/03/2017
@@ -10,10 +10,10 @@
 #define _BUSCA_H_
 
 /**
-* @brief Responsável por realizar uma busca binária e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @brief Responsavel por realizar uma busca binaria e retornar boolean para caso o elemento buscado esteja ou não no vetor
 * @param *V vetor para realizar a busca
 * @param N Tamanho do vetor
-* @param x Elemento à ser buscado no vetor
+* @param x Elemento a ser buscado no vetor
 * @return boolean para o caso do elemento estar ou não no vetor
 */
 template <class T>
@@ -28,10 +28,10 @@ int buscaBinariaR(T *V, int N, T x){
 }
 
 /**
-* @brief Responsável por realizar uma busca binária e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @brief Responsavel por realizar uma busca binaria e retornar boolean para caso o elemento buscado esteja ou não no vetor
 * @param *V vetor para realizar a busca
 * @param N Tamanho do vetor
-* @param x Elemento à ser buscado no vetor
+* @param x Elemento a ser buscado no vetor
 * @return boolean para o caso do elemento estar ou não no vetor
 */
 template <class T>
@@ -50,11 +50,11 @@ int buscaBinariaI(T *V, int N, T x){
 
 
 /**
-* @brief Responsável por realizar uma busca ternária e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @brief Responsavel por realizar uma busca ternaria e retornar boolean para caso o elemento buscado esteja ou não no vetor
 * @param *vetor vetor para realizar a busca
 * @param ini Início do vetor
 * @param fim Final do vetor
-* @param x Elemento à ser buscado no vetor
+* @param x Elemento a ser buscado no vetor
 * @return boolean para o caso do elemento estar ou não no vetor
 */
 template <class  T>
@@ -72,10 +72,10 @@ int buscaTernariaR(T *V, int N, T x, int esq = 0){
 }
 
 /**
-* @brief Responsável por realizar uma busca binária e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @brief Responsavel por realizar uma busca binaria e retornar boolean para caso o elemento buscado esteja ou não no vetor
 * @param *V vetor para realizar a busca
 * @param N Tamanho do vetor
-* @param x Elemento à ser buscado no vetor
+* @param x Elemento a ser buscado no vetor
 * @return boolean para o caso do elemento estar ou não no vetor
 */
 template <class T>
@@ -102,10 +102,10 @@ int buscaTernariaI(T *V, int N, T x){
 
 
 /**
-* @brief Responsável por realizar uma busca sequencial e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @brief Responsavel por realizar uma busca sequencial e retornar boolean para caso o elemento buscado esteja ou não no vetor
 * @param *V vetor para realizar a busca
 * @param N Tamanho do vetor
-* @param x Elemento à ser buscado no vetor
+* @param x Elemento a ser buscado no vetor
 * @return boolean para o caso do elemento estar ou não no vetor
 */
 template <class T>
@@ -119,10 +119,10 @@ int buscaSequencialI(T *V, int N, T x){
 }
 
 /**
-* @brief Responsável por realizar uma busca sequencial e retornar boolean para caso o elemento buscado esteja ou não no vetor
+* @brief Responsavel por realizar uma busca sequencial e retornar boolean para caso o elemento buscado esteja ou não no vetor
 * @param *V vetor para realizar a busca
 * @param N Tamanho do vetor
-* @param x Elemento à ser buscado no vetor
+* @param x Elemento a ser buscado no vetor
 * @return boolean para o caso do elemento estar ou não no vetor
 */
 template <class T>

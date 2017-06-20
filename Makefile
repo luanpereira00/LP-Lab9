@@ -54,10 +54,10 @@ luan.so: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/so
 	@echo "++++ [Biblioteca dinamica criada em $(LIB_DIR)/$@] +++" 
 
 prog_estatico:
-	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.a -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.a -o $(BIN_DIR)/$@
 
 prog_dinamico:
-	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.so -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.so -o $(BIN_DIR)/$@
 
 #windows
 windows: luan.lib luan.dll prog_estatico.exe prog_dinamico.exe
@@ -73,10 +73,10 @@ luan.dll: $(SRC_DIR)/main.cpp $(INC_DIR)/busca.h $(INC_DIR)/vetor.h $(INC_DIR)/s
 	@echo "++++ [Biblioteca dinamica criada em $(LIB_DIR)/$@] +++"
 
 prog_estatico.exe:
-	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.lib -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.lib -o $(BIN_DIR)/$@
 
 prog_dinamico.exe:
-	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.dll -o $(OBJ_DIR)/$@
+	$(CC) $(CFLAGS) $(SRC_DIR)/main.cpp $(LIB_DIR)/luan.dll -o $(BIN_DIR)/$@
 
 init:
 	@mkdir -p $(BIN_DIR)/

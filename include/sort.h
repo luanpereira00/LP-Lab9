@@ -1,6 +1,6 @@
 /**
  * @file	sort.h
- * @brief	Declaração de funções que fazem ordenações de vetores
+ * @brief	Declaracao de funcões que fazem ordenacões de vetores
  * @author	Luan Pereira (luanpereira00@outlook.com)
  * @since	23/03/2017
  * @date	23/03/2017
@@ -9,22 +9,26 @@
 
 #ifndef _SORT_H_
 #define _SORT_H_
-	#include <iostream>
-	using std::cout;
-	using std::endl;
+#include <iostream>
+using std::cout;
+using std::endl;
 
-	#include <cmath>
+#include <cmath>
 
-	#include "vetor.h"
-	
+#include "vetor.h"
+
+/**@brief Namespace para EDB1 */
+namespace EDB1{
+
+	/** @brief Declaracao de template para o tipo T (int, float, double...)*/
+	template <class T>
 
 	/**
-	* @brief Responsável por executar uma ordenação do tipo Bubble(Bolha)
+	* @brief Responsavel por executar uma ordenacao do tipo Bubble(Bolha)
 	* @param *V Apontador para um vetor de inteiros
 	* @param N Tamanho do vetor
 	* @return Sem retorno
 	*/
-	template <class T>
 	void bubbleSort(T *V, int N){
 		int i, j, k=N;
 		
@@ -37,16 +41,16 @@
 		}
 	}
 	
-	
+	/** @brief Declaracao de template para o tipo T (int, float, double...)*/
+	template <class T>
 	
 	/**
-	* @brief Responsável por executar uma ordenação do tipo Decimal
+	* @brief Responsavel por executar uma ordenacao do tipo Decimal
 	* @param *V Apontador para um vetor de inteiros
 	* @param N Tamanho do vetor
-	* @param dec Responsável por indicar à função qual casa decimal ordenar (unid, dezen, cent...)
+	* @param dec Responsavel por indicar a funcao qual casa decimal ordenar (unid, dezen, cent...)
 	* @return Sem retorno
 	*/
-	template <class T>
 	void decimalSort(T *V, int N, int dec = 0){
 		int i, aux;
 		T *Vtemp = new T[N];
@@ -85,14 +89,16 @@
 		delete[] Vsimb;
 		delete[] Voffset;
 	}
+
+	/** @brief Declaracao de template para o tipo T (int, float, double...)*/
+	template <class T>
 	
 	/**
-	* @brief Responsável por executar uma ordenação do tipo Insertion(Inserção)
+	* @brief Responsavel por executar uma ordenacao do tipo Insertion(Insercao)
 	* @param *V Apontador para um vetor de inteiros
 	* @param N Tamanho do vetor
 	* @return Sem retorno
 	*/
-	template <class T>
 	void insertionSort(T *V, int N){
 		int i, j, x;
 		
@@ -107,20 +113,20 @@
 			V[j+1]=x;
 			//cout << "Ordenado ";
 			//printVetor(V, i);
-			//cout << " e Não-Ordenado ";
+			//cout << " e Nao-Ordenado ";
 			//printVetor(&V[i], (N-i));
 		}
 	}
 	
-	
+	/** @brief Declaracao de template para o tipo T (int, float, double...)*/
+	template<class T>
 	
 	/**
-	* @brief Responsável por executar uma ordenação do tipo Selection(Seleção)
+	* @brief Responsavel por executar uma ordenacao do tipo Selection(Selecao)
 	* @param *V Apontador para um vetor de inteiros
 	* @param N Tamanho do vetor
 	* @return Sem retorno
 	*/
-	template<class T>
 	void selectionSort(T *V, int N){
 		int min, i, j;
 		for(i=0; i<N-1; i++){
@@ -132,18 +138,20 @@
 			if(min!=i) troca(&V[min], &V[i]);
 			//cout << "Ordenado ";
 			//printVetor(V, i);
-			//cout << " e Não-Ordenado ";
+			//cout << " e Nao-Ordenado ";
 			//printVetor(&V[i], (N-i));	
 		}
 	}
+
+	/** @brief Declaracao de template para o tipo T (int, float, double...)*/
+	template <class T>
 	
 	/**
-	* @brief Responsável por executar uma intercalação para o MergeSort
+	* @brief Responsavel por executar uma intercalacao para o MergeSort
 	* @param *V Apontador para um vetor de inteiros
 	* @param N Tamanho do vetor
 	* @return Sem retorno
 	*/
-	template <class T>
 	void intercalar(T *V, int N){
 		int i=0, k=N/2, j=0;
 		
@@ -159,14 +167,16 @@
 		trocaVetor(V, Vtemp, N);
 		delete[] Vtemp;
 	}
+
+	/** @brief Declaracao de template para o tipo T (int, float, double...)*/
+	template<class T>
 	
 	/**
-	* @brief Responsável por executar uma ordenação do tipo Merge(Mescla)
+	* @brief Responsavel por executar uma ordenacao do tipo Merge(Mescla)
 	* @param *V Apontador para um vetor de inteiros
 	* @param N Tamanho do vetor
 	* @return Sem retorno
 	*/
-	template<class T>
 	void mergeSort(T *V, int N){
 		if(N<=1) return;
 		if(N==2){
@@ -185,14 +195,16 @@
 		intercalar(V, N);
 		//printVetor(V, N);
 	}
+
+	/** @brief Declaracao de template para o tipo T (int, float, double...)*/
+	template<class T>
 	
 	/**
-	* @brief Responsável por executar uma ordenação do tipo Quick(Rápida)
+	* @brief Responsavel por executar uma ordenacao do tipo Quick(Rapida)
 	* @param *V Apontador para um vetor de inteiros
 	* @param N Tamanho do vetor
 	* @return Sem retorno
 	*/
-	template<class T>
 	void quickSort(T *V, int N){
 		if(N<=1) return;
 		int i=0, j=N-1, pivot;
@@ -217,4 +229,5 @@
 		if(i<N-1) quickSort(&V[j], N-j);
 		//printVetor(V, N);
 	}
+}
 #endif

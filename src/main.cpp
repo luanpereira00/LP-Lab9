@@ -1,3 +1,10 @@
+/**
+ * @file	main.cpp
+ * @brief	Responsável por executar buscas, ordenacoes e criacoes de TADs genericos
+ * @author	Luan Pereira (luanpereira00@outlook.com)
+ * @since	18/03/2017
+ * @date	18/03/2017
+ */
 #include <iostream>
 using std::cin;
 using std::cout;
@@ -11,10 +18,11 @@ using std::endl;
 #include "sort.h"
 #include "busca.h"
 
-
+using namespace EDB1;
+/**@brief Funcao principal */
 int main(){
 
-	/*Lista<int> ll;
+	Lista<int> ll;
 	Deque<int> deq;
 	Fila<int> fi;
 	Pilha<int> pil;
@@ -23,7 +31,7 @@ int main(){
 	cout << deq.temAlgo() << endl;
 	cout << fi.temAlgo() << endl;
 	cout << pil.temAlgo() << endl;
-	cout << endl;*/
+	cout << endl;
 	
 	int X[50];
 
@@ -57,7 +65,7 @@ int main(){
 	decimalSort(X, 50);
 	printVetor(X, 50);
 	
-	/*
+	
 	int V[5] = {1, 2, 4, 5, 8};
 	printVetor(V, 5);
 
@@ -96,6 +104,6 @@ int main(){
 	cout << "BTI: " << buscaTernariaI(V, 5, 6) << endl;
 	cout << "BTI: " << buscaTernariaI(V, 5, 8) << endl;
 	cout << "BTI: " << buscaTernariaI(V, 5, 10) << endl;
-	cout << endl;*/
+	cout << endl;
 	return 0;
 }
